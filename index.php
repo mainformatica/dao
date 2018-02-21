@@ -23,12 +23,20 @@ require_once ("cf.php");
 
 //echo $user;
 
-$aluno = new Usuarios("Lello", "122318");
+//Criando um novo usuario
 
-$aluno->insert();
+//$aluno = new Usuarios("Lello", "122318");
 
-echo $aluno;
+//$aluno->insert();
 
+//echo $aluno;
 
+$user = new Usuarios();
+
+$user -> loadById(5);
+
+$user  -> update("Lello", '12456787');
+
+echo $user;
 
 ?>

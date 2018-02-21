@@ -100,7 +100,7 @@ public function setData($data){
 	public function insert(){
 
 		$sql = new Sql();
-		$results = $sql->select("Call sp_usuarios_insert(:LOGIN, :PASSWORD)", array (':LOGIN'=>$this->getDeslogin(), ':PASSWORD'=>$this->getDessenha()
+		$results = $sql->select("Call sp_usuarios_insert(:LOGIN , :PASSWORD)", array (':LOGIN'=>$this->getDeslogin(), ':PASSWORD'=>$this->getDessenha()
 		));
 
 		if (count($results) > 0) {
@@ -108,6 +108,20 @@ public function setData($data){
 			$this->setData($results[0]);
 		}
 	} 
+
+	public function update($login, $password){
+        
+        $this->setDeslogin($login);
+        $this->setDessenha($password);
+
+		$sql = new Sql();
+		$sql->query("UPDATE tb_usuarios SET deslogin = :LOGIN, dessenha = :PASSWORD WHERE idusuario = : ID", array(
+             ':LOGIN'=>$this->getDeslogin(),
+             ':PASSWORD'=>$this->getDessenha(),
+             ':ID'=>$this->getIdusuario()
+			));
+
+	}
 
 	public function __construct($Login = "", $password = ""){
 

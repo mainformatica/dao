@@ -12,20 +12,20 @@
  	}
     private function setParams($statment, $parameters = array()){
         
-        foreach ($parameters as $key => $value) {
+        foreach ($parameters as $key => $Value) {
  			
- 			$statment->bindParam($key, $value);
+ 			$statment->bindParam($key, $Value);
  		}
 
     }
      
-    private function setParam($statment, $key, $value){
+    private function setParam($statment, $key, $Value){
 
-    	$statment->bindParam($key, $value);
+    	$statment->bindParam($key, $Value);
     }
- 	public function query($rowQuery, $params = array()){
+ 	public function query($rawQuery, $params = array()){
 
- 		$stmt = $this->conn->prepare($rowQuery);
+ 		$stmt = $this->conn->prepare($rawQuery);
  		
  		$this->setParams($stmt, $params);
 
@@ -34,10 +34,10 @@
  		return $stmt;
  	}
 
- 	public function select($rowQuery, $params = array()):array
+ 	public function select($rawQuery, $params = array()):array
  	{
 
- 	$stmt = $this->query($rowQuery, $params);
+ 	$stmt = $this->query($rawQuery, $params);
  	return $stmt->fetchAll(PDO::FETCH_ASSOC);
  	}
  }
