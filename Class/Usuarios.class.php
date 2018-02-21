@@ -46,7 +46,7 @@ class Usuarios {
 
 		$sql = new Sql();
 		$results = $sql->select("SELECT * FROM tb_usuarios WHERE idusuario = :ID", array(
-          ":ID"=>$id));
+          ':ID'=>$id));
 
 		if (count($results) > 0){
 			$this->setData($results[0]);
@@ -67,11 +67,11 @@ class Usuarios {
 		));
 	}
 
-public function login($login, $password){
+public function Login($login, $password){
       $sql = new Sql();
 		$results = $sql->select("SELECT * FROM tb_usuarios WHERE deslogin = :LOGIN AND dessenha = :PASSWORD ", array(
-          ":LOGIN"=>$login,
-          ":PASSWORD"=>$password
+          ':LOGIN'=>$login,
+          ':PASSWORD'=>$password
       ));
 
 		if (count($results) > 0){
@@ -86,7 +86,7 @@ public function login($login, $password){
 	}
 }
 
-public function setData($data){
+	public function setData($data){
             
             $this->setIdusuario($data['idusuario']);
 			$this->setDeslogin($data['deslogin']);
@@ -94,13 +94,11 @@ public function setData($data){
 			$this->setDtcadastro(new DateTime($data['dtcadastro']));
 
 	}
-
-
 	
 	public function insert(){
 
 		$sql = new Sql();
-		$results = $sql->select("Call sp_usuarios_insert(:LOGIN , :PASSWORD)", array (':LOGIN'=>$this->getDeslogin(), ':PASSWORD'=>$this->getDessenha()
+		$results = $sql->select("CALL sp_usuarios_insert (:LOGIN, :PASSWORD)", array (':LOGIN' =>$this->getDeslogin(), ':PASSWORD' =>$this->getDessenha()
 		));
 
 		if (count($results) > 0) {
@@ -122,10 +120,24 @@ public function setData($data){
 			));
 
 	}
+	 public function delete(){
 
-	public function __construct($Login = "", $password = ""){
+	 	$sql = new Sql();
+	 	$sql->query("DELETE FROM tb_usuarios WHERE idusuario = :ID" , array(
+          ':ID'=>$this->getIdusuario()
+	 	));
 
-		$this->setDeslogin($Login);
+	 	$this->setIdusuario(0);
+	 	$this->setDeslogin("");
+	 	$this->setDessenha("");
+	 	$this->setDtcadastro(new DateTime());
+
+
+	 }
+
+	public function __construct($login = "", $password = ""){
+
+		$this->setDeslogin($login);
 		$this->setDessenha($password);
 	}
      

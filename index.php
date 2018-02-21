@@ -4,7 +4,7 @@ require_once ("cf.php");
 
 //Carrega apenas um usuario
 //$user = new Usuarios();
-//$user ->loadById(4);
+//$user ->loadById(12);
 //echo $user;
 
 // carrega um alista de Usuarios
@@ -13,8 +13,8 @@ require_once ("cf.php");
 
 // Carrega uma lista de dados buscando pelo login
 
-  //$search = Usuarios::search("jo");
-   //echo json_encode($search);
+  //$search = Usuarios::search("test");
+  //echo json_encode($search);
 
 // carrega usuario usuando login e senha
 
@@ -23,20 +23,33 @@ require_once ("cf.php");
 
 //echo $user;
 
-//Criando um novo usuario
+/* Criando um novo usuario */
 
-//$aluno = new Usuarios("Lello", "122318");
+//$user = new Usuarios('Lello', "122318");
 
-//$aluno->insert();
+//$user->insert();
 
-//echo $aluno;
+//echo $user;
 
+/* Atualizando um Usuario */
 $user = new Usuarios();
 
 $user -> loadById(5);
 
-$user  -> update("Lello", '12456787');
+$user  -> update("eu", "12456787");
 
 echo $user;
+
+/* Deletando Um Usuario */
+
+//$user = new Usuarios();
+//$user->loadById(15);
+//$user->delete();
+//echo $user;
+
+
+
+
+
 
 ?>
